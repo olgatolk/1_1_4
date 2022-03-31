@@ -12,13 +12,9 @@ public class UserDaoJDBCImpl implements UserDao {
 
     Connection connection = Util.getMyConnection();
     public UserDaoJDBCImpl() {
-
     }
 
-
     public void createUsersTable() {
-
-
 
         try (Statement statement = connection.createStatement()) {
             String sql = "CREATE TABLE IF NOT EXISTS `bd_1`.`user` (\n" +
@@ -34,13 +30,9 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
     }
 
     public void dropUsersTable() {
-
 
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("DROP TABLE IF EXISTS bd_1.user");
@@ -53,7 +45,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
 
-        try {
+       try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO bd_1.user(name, lastName, age) VALUES(?, ?, ?)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
@@ -63,7 +55,6 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public void removeUserById(long id) {
@@ -76,7 +67,6 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public List<User> getAllUsers() {
@@ -84,7 +74,6 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM bd_1.user")) {
 
-           // String sql = "SELECT * FROM bd_1.user";
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 User user = new User();
@@ -99,8 +88,7 @@ public class UserDaoJDBCImpl implements UserDao {
             e.printStackTrace();
         }
         return users;
-       // return null;
-    }
+     }
 
     public void cleanUsersTable() {
         try {
